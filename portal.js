@@ -36,7 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         } else {
-            window.location.href = 'index.html';
+            const authSection = document.getElementById('auth-section');
+            if (authSection) {
+                authSection.classList.remove('hidden');
+            }
+            const portalContainer = document.querySelector('.portal-container');
+            if (portalContainer) {
+                portalContainer.classList.add('hidden');
+            }
         }
     });
 });
