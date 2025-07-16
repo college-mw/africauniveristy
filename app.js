@@ -1053,6 +1053,7 @@ async function loadAllCourses(currentUserId) {
                     <p><strong>Code:</strong> ${course.code || 'N/A'}</p>
                     <p><strong>Credits:</strong> ${course.creditHours || 'N/A'}</p>
                     <p>${course.description ? course.description.substring(0,150) + '...' : 'No description available.'}</p>
+                    <a href="course.html?id=${courseId}" class="btn">View Details</a>
                     ${buttonHtml}`;
                 coursesContainer.appendChild(courseCard);
             }
