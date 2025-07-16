@@ -254,11 +254,7 @@ header#auth-section.hidden {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 #welcome-message {
-    background-image: url('home.png');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
+    background-color: var(--secondary-cool-gray);
 }
 
 #welcome-message h1, #welcome-message p {
@@ -566,9 +562,70 @@ footer {
 }
 
 /* Responsive Design */
-@media (min-width: 769px) {
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    nav .container {
+        flex-direction: column;
+    }
+
     .desktop-nav {
-        display: flex;
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .course-list {
+        grid-template-columns: 1fr;
+    }
+
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.9em; }
+    h3 { font-size: 1.6em; }
+
+    .auth-form {
+        padding: 1.5em;
+        max-width: 100%;
+    }
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-logo, .footer-links {
+        flex: none;
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    .footer-links ul {
+        display: inline-block;
+        text-align: center;
+    }
+    #profile-page .page-content, #dashboard-page .page-content, #admin-page .page-content, #course-detail-page .page-content {
+        padding: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    nav .logo { font-size: 1.4em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.7em; }
+    h3 { font-size: 1.4em; }
+
+    .btn, button, .auth-form button {
+        font-size: 0.9em;
+        padding: 12px 18px;
+    }
+    #profile-page .page-content, #dashboard-page .page-content, #admin-page .page-content, #course-detail-page .page-content {
+        padding: 1em;
+    }
+    .course-card { padding: 20px; }
+    #modules-list li, #announcements-list li, #platform-news-list li, #upcoming-assignments-list li, .assessment-item {
+        padding: 15px;
     }
 }
 

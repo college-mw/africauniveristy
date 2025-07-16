@@ -88,7 +88,7 @@ function showAuthSection(e){
     if (welcomeMessage) welcomeMessage.classList.add('hidden'); 
     if (mainContentPages.home && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/'))) {
         const coursesContainer = document.getElementById('courses-container');
-        if (coursesContainer) coursesContainer.innerHTML = ''; 
+        if (coursesContainer) coursesContainer.innerHTML = '<p>Log in to see available courses.</p>';
     }
 }
 
