@@ -252,7 +252,7 @@ header#auth-section.hidden {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 #welcome-message {
-    background-image: url('https://res.cloudinary.com/djuhngvo7/image/upload/v1752328857/ChatGPT_Image_Jul_12_2025_04_00_37_PM_oa83dd.png');
+    background-image: url('home.png');
     background-size: cover;
     background-position: center;
     color: white;
