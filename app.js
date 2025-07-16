@@ -673,59 +673,6 @@ function initializeAccordion() {
     // This function is now empty.
 }
 
-function initializeCourseAdminPage(user, userData) {
-    console.log("Initializing Course Admin Page for user:", user.uid);
-    const courseId = new URLSearchParams(window.location.search).get('id');
-    const courseAdminForm = document.getElementById('course-admin-form');
-    const courseTitleEl = document.getElementById('course-title');
-    const courseCodeEl = document.getElementById('course-code');
-    const courseCreditsEl = document.getElementById('course-credits');
-    const courseDescriptionEl = document.getElementById('course-description');
-    const courseSyllabusEl = document.getElementById('course-syllabus');
-    const courseIdEl = document.getElementById('course-id');
-
-    if (!courseId) {
-        courseAdminForm.innerHTML = "<p>No course ID provided in the URL.</p>";
-        return;
-    }
-
-    const courseRef = ref(db, `courses/${courseId}`);
-    get(courseRef).then(snapshot => {
-        if (!snapshot.exists()) {
-            courseAdminForm.innerHTML = "<p>The requested course does not exist.</p>";
-            return;
-        }
-
-        const courseData = snapshot.val();
-        courseTitleEl.value = courseData.title;
-        courseCodeEl.value = courseData.code;
-        courseCreditsEl.value = courseData.creditHours;
-        courseDescriptionEl.value = courseData.description;
-        courseSyllabusEl.value = courseData.syllabus;
-        courseIdEl.value = courseId;
-    });
-
-    courseAdminForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const courseId = document.getElementById('course-id').value;
-        const courseRef = ref(db, `courses/${courseId}`);
-        const updates = {
-            title: document.getElementById('course-title').value,
-            code: document.getElementById('course-code').value,
-            creditHours: parseFloat(document.getElementById('course-credits').value),
-            description: document.getElementById('course-description').value,
-            syllabus: document.getElementById('course-syllabus').value,
-        };
-        try {
-            await update(courseRef, updates);
-            alert('Course details updated successfully!');
-        } catch (error) {
-            console.error('Error updating course details:', error);
-            alert(`Error updating course details: ${error.message}`);
-        }
-    });
-}
-
 /**
  * Initializes the learning page for a specific course.
  * @param {User} user The user object from Firebase Auth.
@@ -937,7 +884,7 @@ function loadUserData(user) {
             } else if (currentPage === 'course.html') {
                 loadCourseDetailsWithAccessCheck(user, userData); 
             } else if (currentPage === 'course-admin.html') {
-                if (userData.role === 'admin' || userData.role === 'faculty') {
+                if (auth.currentUser && auth.currentUser.email === 'chipimizere@gmail.com') {
                     initializeCourseAdminPage(user, userData);
                 } else {
                     window.location.href = 'index.html';
@@ -1112,7 +1059,7 @@ async function loadAllCourses(currentUserId) {
                     <p><strong>Code:</strong> ${course.code || 'N/A'}</p>
                     <p><strong>Credits:</strong> ${course.creditHours || 'N/A'}</p>
                     <p>${course.description ? course.description.substring(0,150) + '...' : 'No description available.'}</p>
-                    ${(userData.role === 'admin' || userData.role === 'faculty') ? `<a href="course-admin.html?id=${courseId}" class="btn">View Details</a>` : `<a href="course.html?id=${courseId}" class="btn">View Course</a>`}
+                    ${(auth.currentUser && auth.currentUser.email === 'chipimizere@gmail.com') ? `<a href="course-admin.html?id=${courseId}" class="btn">View Details</a>` : `<a href="course.html?id=${courseId}" class="btn">View Course</a>`}
                     ${buttonHtml}`;
                 coursesContainer.appendChild(courseCard);
             }
